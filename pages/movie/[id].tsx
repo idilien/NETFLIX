@@ -7,6 +7,8 @@ import { Layout } from '../../components/layout/Layout';
 import { tmdbApi } from '../../api';
 import { Movie, TmdbListResponse } from '../../interfaces';
 import { localFavorites } from '../../utils';
+import YouTube from 'react-youtube';
+
 
 interface Props {
   movie: Movie
@@ -43,7 +45,7 @@ const MoviePage: NextPage<Props>= ({movie}) => {
                          src={`http://image.tmdb.org/t/p/w300/${movie.poster_path}`}
                         //  objectFit="cover"
                          width="100%"
-                         height={300}
+                         height={400}
                          alt="poster movie"
                     />
                   </Card.Body>
@@ -52,12 +54,17 @@ const MoviePage: NextPage<Props>= ({movie}) => {
         <Grid xs={12} sm={8}>
           <Card>
             <Card.Header css={{display: 'flex', justifyContent: 'space-between'}}>
-              <Text h1>
+            <Grid>
+              <Text h3>
                   {movie.original_title}
               </Text>
               <Text>
-                  {movie.homepage}
+                  {movie.overview}
               </Text>
+              <Text>
+                 Likes {movie.vote_average} 
+              </Text>
+        </Grid>
               <Button
                 color="gradient"         
                 ghost={!isInFavorites}
@@ -69,6 +76,7 @@ const MoviePage: NextPage<Props>= ({movie}) => {
             </Card.Header>
           </Card>
         </Grid>
+     
 
       </Grid.Container>
     

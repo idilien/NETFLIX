@@ -1,7 +1,7 @@
 import { Button, Grid, Link, Spacer, Text, useTheme } from "@nextui-org/react"
 import Image from "next/image"
 import NextLink from "next/link"
-
+import { Input } from "@nextui-org/react";
 
 export const Navbar = () => {
 
@@ -24,9 +24,17 @@ export const Navbar = () => {
           {/* <Text color="red" h1>N</Text>  */}
           <Text color="red" h2>NETFLIX</Text> 
       </Grid>
-     
+      <Grid>
+      </Grid>
       </NextLink>
           <Spacer css={{flex:1}}/>
+            <Input 
+            shadow
+            css={{paddingRight:10}} 
+            status="success" 
+            placeholder="Buscar" 
+            color="primary"
+            />
           <NextLink href="/favorites" passHref>
           <Button
                 color="gradient"

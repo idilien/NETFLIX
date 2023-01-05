@@ -18,12 +18,12 @@ export const FavoriteCardMovie: FC<Props> = ({movieId}) => {
     <Grid xs={6} sm={3}  md={2} xl={1} key={movieId} onClick= {onFavoriteClicked}>
     <Card isHoverable  isPressable   css={{ padding: 10}}>
         <Text>Data Pelicula{movieId}</Text>
-        {/* <Card.Image
-            src={`http://image.tmdb.org/t/p/w300/${movie.poster_path}`}
+        <Card.Image
+            src={`https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.png`}
             width={'100%'}
             height={140}
-            alt="img pokemon"
-        /> */}
+            alt="img movie"
+        />
     </Card>
 </Grid>
   )
