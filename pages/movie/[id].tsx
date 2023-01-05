@@ -9,19 +9,13 @@ import { Movie, TmdbListResponse } from '../../interfaces';
 import { localFavorites } from '../../utils';
 import { YoutubeMovie } from '../../utils/youtubeMovie';
 
-
-
 // interface Props {
 //   movie: Movie
 // }
 
-
-  
   const MoviePage: NextPage<any>= (movie) => {
   
-
   // console.log(movie);
-
 
   const [isInFavorites, setIsInFavorites] = useState(localFavorites.existMovieInFavorites(movie.movie.id))
   const [playYoutube, setPlayYoutube] = useState(false)
@@ -143,33 +137,5 @@ return {
     }
 }
 }
-// export const getStaticProps: GetStaticProps = async ({params}) => {
-//   const {data} = await axios(`https://api.themoviedb.org/3/movie/76600/videos?api_key=b56055aca31a6f81a3ce19e3ab8b58b3` )
-//   const trailer = data.results.filter(
-//     (video:any) => video.name === "Official Trailer"
-//     )
-  
-// return {
-//     props: {
-//         trailer: trailer,
-            
-//     }
-// }
-// }
-
-// const fetchMovie = async (setTrailer:any) => {
- 
-//   const movieTrailer = data.results.filter(
-//     (video:any) => video.name === "Official Trailer"
-//     )
-    
-//     return setTrailer( movieTrailer[0])
-    
-//   }
- 
-
-
-
-
 
 export default MoviePage
