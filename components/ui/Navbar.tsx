@@ -2,8 +2,18 @@ import { Button, Grid, Link, Spacer, Text, useTheme } from "@nextui-org/react"
 import Image from "next/image"
 import NextLink from "next/link"
 import { Input } from "@nextui-org/react";
+import { useState } from 'react';
 
 export const Navbar = () => {
+
+  const [searhKey, setSearchKey] = useState('');
+
+  
+
+  const searchMovie = (e:any) => {
+    e.preventDefault()
+    console.log('buscando pelicula')
+  }
 
   const {theme} = useTheme()
 
@@ -27,14 +37,22 @@ export const Navbar = () => {
       <Grid>
       </Grid>
       </NextLink>
-          <Spacer css={{flex:1}}/>
-            <Input 
-            shadow
-            css={{paddingRight:10}} 
-            status="success" 
-            placeholder="Buscar" 
-            color="primary"
-            />
+          <Spacer />
+          {/* <form onSubmit={searchMovie}>
+              <Input 
+                type="text"
+                shadow
+                css={{paddingRight:10}} 
+                status="success" 
+                placeholder="Buscar" 
+                color="primary"
+                onChange={(e) => setSearchKey(e.target.value)}
+                />
+                <Button
+                ghost>
+                  Buscar
+                </Button>
+              </form> */}
           <NextLink href="/favorites" passHref>
           <Button
                 color="gradient"

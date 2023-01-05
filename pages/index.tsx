@@ -14,56 +14,54 @@ interface Props {
 
 const Home: NextPage<Props> =({movies}) => {
 
-// console.log(movies)
+
 
   return (
     
-      <Layout title='NETFLIX - Populate Movies'>
-<Container lg>
+    <Layout title='NETFLIX - Populate Movies'>
+        <Container lg>
 
-<Card css={{ w: "100%", h: "400px" }}>
-         <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
-           <Col css={{paddingTop:30}}>
-             <Text size={12} weight="bold" transform="uppercase" color="#9E9E9E">
-               {/* {movie.release_date} */}
-             </Text>
-             <Text h1 color="black">
-               Avatar: The Way of Water
-             </Text>
-             <Row justify="flex-start">
-               
-             <Button
-                   flat
-                   auto
-                   rounded
-                   css={{ color: "#213d3b", bg: "#94f9f026" }}
-                   
-                   >
-                   <Text
-                     css={{ padding:10, color: "inherit" }}
-                     size={12}
-                     weight="bold"
-                     transform="uppercase"
-                     >
-                      Ver Trailer
-                   </Text>
-                 </Button>
-                     </Row>
-           </Col>
-         </Card.Header>
-         <Card.Body css={{ p: 0 }}>
-           <Card.Image
-              src={` https://image.tmdb.org/t/p/w500/s16H6tpK2utvwDtzZ8Qy4qm5Emw.jpg`}
-             objectFit="fill"
-             width="100%"
-             height="100%"
-             alt="Relaxing app background"
-           />
-         </Card.Body>
-       
-</Card>
+              <Card css={{ w: "100%", h: "400px" }}>
+                      <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
+                        <Col css={{paddingTop:30}}>
+                          <Text size={12} weight="bold" transform="uppercase" color="#9E9E9E">
+                            {/* {movie.release_date} */}
+                          </Text>
+                          <Text h1 color="black">
+                            Avatar: The Way of Water
+                          </Text>
+                          <Row justify="flex-start">
+                            
+                          <Button
+                                flat
+                                auto
+                                rounded
+                                css={{ color: "#213d3b", bg: "#94f9f026" }}      
+                                >
+                                <Text
+                                  css={{ padding:10, color: "inherit" }}
+                                  size={12}
+                                  weight="bold"
+                                  transform="uppercase"
+                                  >
+                                    Ver Trailer
+                                </Text>
+                              </Button>
+                                  </Row>
+                        </Col>
+                      </Card.Header>
+                      <Card.Body css={{ p: 0 }}>
+                        <Card.Image
+                            src={` https://image.tmdb.org/t/p/w500/s16H6tpK2utvwDtzZ8Qy4qm5Emw.jpg`}
+                          objectFit="cover"
+                          width="100%"
+                          height="100%"
+                          alt="Relaxing app background"
+                        />
+                      </Card.Body>            
+              </Card>
 
-          <Grid.Container gap={2} justify='flex-start'>
+          <Grid.Container gap={2} >
           {movies.map( (movie) => (
             <MovieCard
             key={movie.id}
@@ -81,14 +79,10 @@ const Home: NextPage<Props> =({movies}) => {
 
   
   export const getStaticProps: GetStaticProps = async (ctx) => {
-    // With Fetch
-    // const response = await fetch('https://api.themoviedb.org/3/movie/550?api_key=b56055aca31a6f81a3ce19e3ab8b58b3')
-    // const data = await response.json()
-    // console.log(data)
-    
-    const API_KEY = 'b56055aca31a6f81a3ce19e3ab8b58b3'
+
+
+    const API_KEY = process.env.API_KEY
     // Version Axios 5.0 No Actual Verison
-    // const {data} = await tmdbApi.get<TmdbListResponse>(`/popular?api_key=b56055aca31a6f81a3ce19e3ab8b58b3`)
     const {data} = await tmdbApi.get<TmdbListResponse>(`/popular?api_key=${API_KEY}`)
   
   const movies: Result[] = data.results.map( (movi, i) => ({
@@ -96,7 +90,7 @@ const Home: NextPage<Props> =({movies}) => {
     id: movi.id,
     title: movi.original_title,
     img: movi.poster_path
-    // img: `https://api.themoviedb.org/3/movie/${movi.id}/images?api_key=b56055aca31a6f81a3ce19e3ab8b58b3&language=en-US`
+    
   }))
  
 

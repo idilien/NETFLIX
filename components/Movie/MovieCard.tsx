@@ -85,7 +85,7 @@ export const MovieCard: FC<Props> = ({movie}) => {
                    auto
                    rounded
                    css={{ color: "#94f9f0", bg: "#94f9f026" }}
-                   onClick={onClick}
+                   onPress={onClick}
                  >
                    <Text
                      css={{ color: "inherit" }}

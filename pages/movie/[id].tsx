@@ -7,20 +7,31 @@ import { Layout } from '../../components/layout/Layout';
 import { tmdbApi } from '../../api';
 import { Movie, TmdbListResponse } from '../../interfaces';
 import { localFavorites } from '../../utils';
-import YouTube from 'react-youtube';
+import { YoutubeMovie } from '../../utils/youtubeMovie';
 
 
-interface Props {
-  movie: Movie
-}
+
+// interface Props {
+//   movie: Movie
+// }
 
 
-const MoviePage: NextPage<Props>= ({movie}) => {
+  
+  const MoviePage: NextPage<any>= (movie) => {
+  
 
-  const [isInFavorites, setIsInFavorites] = useState(localFavorites.existMovieInFavorites(movie.id))
+  // console.log(movie);
+
+
+  const [isInFavorites, setIsInFavorites] = useState(localFavorites.existMovieInFavorites(movie.movie.id))
+  const [playYoutube, setPlayYoutube] = useState(false)
+
+  const onTogglePlay = () => {
+    setPlayYoutube(!playYoutube)
+  }
 
   const onToggleFavorite = () => {
-    localFavorites.toggleFavorite(movie.id)
+    localFavorites.toggleFavorite(movie.movie.id)
     setIsInFavorites(!isInFavorites)
     if(isInFavorites) return
       confetti({
@@ -35,14 +46,15 @@ const MoviePage: NextPage<Props>= ({movie}) => {
       })
   }
 
+
   return(
-    <Layout title={movie.original_title}>
+    <Layout title={movie.movie.original_title}>
       <Grid.Container css={{marginTop: '5px'}} gap={2}>
         <Grid xs={12} sm={4}>  
           <Card isHoverable   css={{padding: '30px'}}>
                   <Card.Body>
                     <Card.Image
-                         src={`http://image.tmdb.org/t/p/w300/${movie.poster_path}`}
+                         src={`http://image.tmdb.org/t/p/w300/${movie.movie.poster_path}`}
                         //  objectFit="cover"
                          width="100%"
                          height={400}
@@ -56,13 +68,13 @@ const MoviePage: NextPage<Props>= ({movie}) => {
             <Card.Header css={{display: 'flex', justifyContent: 'space-between'}}>
             <Grid>
               <Text h3>
-                  {movie.original_title}
+                  {movie.movie.original_title}
               </Text>
               <Text>
-                  {movie.overview}
+                  {movie.movie.overview}
               </Text>
               <Text>
-                 Likes {movie.vote_average} 
+                 Likes {movie.movie.vote_average} 
               </Text>
         </Grid>
               <Button
@@ -76,17 +88,33 @@ const MoviePage: NextPage<Props>= ({movie}) => {
             </Card.Header>
           </Card>
         </Grid>
-     
-
+        <Grid.Container gap={2} justify='flex-start'>
+                <Grid>
+                {playYoutube ? (
+                           <YoutubeMovie videoId={movie.trailer[0].key}/>
+              
+                  ): (
+                    <Text h1></Text>
+                    )}         
+                </Grid>
+                <Grid justify="flex-end">
+                        <Button
+                        color="gradient"         
+                        ghost={!playYoutube}
+                        onPress={onTogglePlay}
+                        >
+                          {playYoutube  ? 'X Cerrar' : 'Ver Trailer'}             
+                        </Button>
+                </Grid>
+        </Grid.Container>
       </Grid.Container>
-    
     </Layout>
   )
 }
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-
-  const {data} = await tmdbApi.get<TmdbListResponse>('/popular?api_key=b56055aca31a6f81a3ce19e3ab8b58b3')
+  const API_KEY = process.env.API_KEY
+  const {data} = await tmdbApi.get<TmdbListResponse>(`/popular?api_key=${API_KEY}`)
   const paths = data.results.map( ({id}) => ({
     params: {id: `${id}`}
   }))
@@ -99,15 +127,49 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 }
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
-
+  const API_KEY = process.env.API_KEY
   const {id} = params as {id: string}
   const {data} = await tmdbApi.get<Movie>(`/${id}?api_key=b56055aca31a6f81a3ce19e3ab8b58b3`)
- 
+  const resp = await tmdbApi.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}` )
+
+    const trailer = resp.data.results.filter(
+      (video:any) => video.name === "Official Trailer"
+      )
+     
 return {
     props: {
-        movie: data
+        movie: data,
+        trailer: trailer      
     }
 }
 }
+// export const getStaticProps: GetStaticProps = async ({params}) => {
+//   const {data} = await axios(`https://api.themoviedb.org/3/movie/76600/videos?api_key=b56055aca31a6f81a3ce19e3ab8b58b3` )
+//   const trailer = data.results.filter(
+//     (video:any) => video.name === "Official Trailer"
+//     )
+  
+// return {
+//     props: {
+//         trailer: trailer,
+            
+//     }
+// }
+// }
+
+// const fetchMovie = async (setTrailer:any) => {
+ 
+//   const movieTrailer = data.results.filter(
+//     (video:any) => video.name === "Official Trailer"
+//     )
+    
+//     return setTrailer( movieTrailer[0])
+    
+//   }
+ 
+
+
+
+
 
 export default MoviePage
