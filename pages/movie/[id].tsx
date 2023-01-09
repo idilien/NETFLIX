@@ -43,65 +43,63 @@ import { YoutubeMovie } from '../../utils/youtubeMovie';
 
   return(
     <Layout title={movie.movie.original_title}>
-      <Grid.Container css={{marginTop: '5px'}} gap={2}>
-        <Grid xs={12} sm={4}>  
-          <Card isHoverable   css={{padding: '30px'}}>
-                  <Card.Body>
-                    <Card.Image
-                         src={`http://image.tmdb.org/t/p/w300/${movie.movie.poster_path}`}
-                        //  objectFit="cover"
-                         width="100%"
-                         height={400}
-                         alt="poster movie"
-                    />
-                  </Card.Body>
-              </Card>  
-        </Grid>
-        <Grid xs={12} sm={8}>
-          <Card>
-            <Card.Header css={{display: 'flex', justifyContent: 'space-between'}}>
-            <Grid>
-              <Text h3>
-                  {movie.movie.original_title}
-              </Text>
-              <Text>
-                  {movie.movie.overview}
-              </Text>
-              <Text>
-                 Likes {movie.movie.vote_average} 
-              </Text>
-        </Grid>
-              <Button
-                color="gradient"         
-                ghost={!isInFavorites}
-                onPress={onToggleFavorite}
-                >
-                  {isInFavorites  ? 'Incluido en mi lista' : 'Añadir a mi lista'}
+      <Grid css={{marginTop: '5px'}} >
+              <Grid>  
+                <Card isHoverable   css={{padding: '30px'}}>
+                        <Card.Body>
+                          <Card.Image
+                              src={`http://image.tmdb.org/t/p/w300/${movie.movie.poster_path}`}
+                              //  objectFit="cover"
+                              width="100%"
+                              height={400}
+                              alt="poster movie"
+                          />
+                        </Card.Body>
+                    </Card>  
+              </Grid>
                 
-                </Button>
-            </Card.Header>
-          </Card>
-        </Grid>
-        <Grid.Container gap={2} justify='flex-start'>
-                <Grid>
-                {playYoutube ? (
-                           <YoutubeMovie videoId={movie.trailer[0].key}/>
-              
-                  ): (
-                    <Text h1></Text>
-                    )}         
-                </Grid>
-                <Grid justify="flex-end">
-                        <Button
-                        color="gradient"         
-                        ghost={!playYoutube}
-                        onPress={onTogglePlay}
-                        >
-                          {playYoutube  ? 'X Cerrar' : 'Ver Trailer'}             
-                        </Button>
-                </Grid>
-        </Grid.Container>
-      </Grid.Container>
+              <Grid>
+                    <Text h3>
+                        {movie.movie.original_title}
+                    </Text>
+                    <Text>
+                        {movie.movie.overview}
+                    </Text>
+                    <Text>
+                      Likes {movie.movie.vote_average} 
+                    </Text>
+              </Grid> 
+              <Grid.Container gap={2} justify="space-around" alignItems='center'>
+                      <Grid>
+                              <Grid>
+                              {playYoutube && 
+                                <YoutubeMovie videoId={movie.trailer[0].key}/>
+                              }
+                                        
+                              </Grid>
+                              <Grid>
+                                      <Button
+                                      color="gradient"         
+                                      ghost={!playYoutube}
+                                      onPress={onTogglePlay}
+                                      >
+                                        {playYoutube  ? 'X Cerrar' : 'Ver Trailer'}             
+                                      </Button>
+                              </Grid>
+
+                      </Grid>
+                      <Grid>
+                            <Button
+                                  color="gradient"         
+                                  ghost={!isInFavorites}
+                                  onPress={onToggleFavorite}
+                                  >
+                                    {isInFavorites  ? 'Incluido en mi lista' : 'Añadir a mi lista'}      
+                              </Button>
+                      </Grid>                        
+              </Grid.Container>
+
+      </Grid>
     </Layout>
   )
 }
