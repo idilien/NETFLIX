@@ -14,7 +14,7 @@ export const NoFavorites = () => {
           <Text h1>Mi Lista Está Vacía</Text>
           <Image
             css={{opacity: 0.7}}
-            src={'./public/img/alien.wepp'}
+            src={'img/alien.webp'}
             width={250}
             height={250}
             alt='img alien'

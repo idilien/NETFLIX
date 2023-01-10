@@ -53,7 +53,7 @@ export const Navbar = () => {
                   Buscar
                 </Button>
               </form> */}
-          <NextLink href="/favorites" passHref>
+          {/* <NextLink href="/favorites" passHref>
           <Button
                 color="gradient"
                 ghost
@@ -61,7 +61,7 @@ export const Navbar = () => {
                 >
                   Mi Lista      
           </Button>   
-        </NextLink>
+        </NextLink> */}
     </div>
   )
 }

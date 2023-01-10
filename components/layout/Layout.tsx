@@ -22,7 +22,7 @@ type Props = {
         <meta name="keyword" content={`${title} movie`}/>
         <meta property="og:title" content={`Information about ${title}`} />
         <meta property="og:description" content={`Web list movies ${title}`} />
-        {/* <meta property="og:image" content={`${origin}_next/image?url=%2Fimg%2Fbanner.png&w=640&q=75`}/> */}
+       
     </Head>
    
 
