@@ -16,7 +16,7 @@ import  axios  from "axios"
 
   const MoviePage: NextPage<any>= (movie) => {
   
-  console.log(movie);
+  // console.log(movie);
 
   const [isInFavorites, setIsInFavorites] = useState(localFavorites.existMovieInFavorites(movie.movie.id))
   const [playYoutube, setPlayYoutube] = useState(false)
