@@ -71,9 +71,9 @@ import  axios  from "axios"
                         Productoras: 
                         </Text>
                         <Text>                 
-                        {movie.movie.production_companies[0].name} 
+                        {/* {movie.movie.production_companies[0].name}  */}
                     </Text >
-                          {movie.movie.production_companies[1].name} 
+                          {/* {movie.movie.production_companies[1].name}  */}
 
             
                     <Text h5 size={20} css={{marginTop: '30px', marginBottom:'0'}}>
