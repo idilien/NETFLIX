@@ -8,7 +8,7 @@ import { tmdbApi } from '../../api';
 import { Movie, TmdbListResponse } from '../../interfaces';
 import { localFavorites } from '../../utils';
 import { YoutubeMovie } from '../../utils/youtubeMovie';
-
+import  axios  from "axios"
 
 // interface Props {
 //   movie: Movie
@@ -47,14 +47,16 @@ import { YoutubeMovie } from '../../utils/youtubeMovie';
       
               <Grid.Container gap={5} css={{marginTop: '5px'}} justify="space-around" >
               <Grid  sm={12} md={8} >  
-                  <Card isHoverable >            
+                  <Card isHoverable >     
+                  <Card.Body>
                           <Card.Image 
                               src={`http://image.tmdb.org/t/p/w300/${movie.movie.poster_path}`}
                               objectFit='contain'
                               width="100%"
-                              height={200}
+                              height="100%"
                               alt="poster movie"
-                          />                              
+                              />                              
+                              </Card.Body>       
                     </Card>         
               <Grid  css={{marginTop: '50px'}}>
                     <Text h2   css={{
@@ -107,7 +109,7 @@ import { YoutubeMovie } from '../../utils/youtubeMovie';
                               </Grid>
 
                       </Grid>
-                      <Grid>
+                       <Grid>
                             <Button
                                   color="gradient"         
                                   ghost={!isInFavorites}
@@ -115,71 +117,71 @@ import { YoutubeMovie } from '../../utils/youtubeMovie';
                                   >
                                     {isInFavorites  ? 'Incluido en mi lista' : 'Añadir a mi lista'}      
                               </Button>
-                      </Grid>                              
+                      </Grid>                         
               </Grid.Container>
 
             
         <Grid.Container gap={2} css={{maxWidth:'1220px', margin:'auto', marginTop: '5px'}} justify="space-around" >
-            {movie.credits.map((credit:any) => (
-                <Grid
-                xs={8}
-                sm={4}
-                md={3}
-                xl={2}
-                key={credit.id}
-            >
+          {movie.credits.map((credit:any) => (
+              <Grid
+              xs={8}
+              sm={4}
+              md={3}
+              xl={2}
+              key={credit.id}
+          >
 
-            <Card css={{ w: "100%", h: "400px" }}>
-            <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
-            <Col>
-            <Text size={12} weight="bold" transform="uppercase" color="#9E9E9E">
-              {/* {movie.release_date} */}
-            </Text>
-            {/* <Text h2 color="white">
-              {movie.original_title}
-            </Text> */}
-            </Col>
-            </Card.Header>
-            <Card.Body css={{ p: 0 }}>
-            <Card.Image
-                src={`http://image.tmdb.org/t/p/w300/${credit.profile_path}`}
-                objectFit="contain"
-                width="100%"
-                height="100%"
-                alt="Relaxing app background"
-            />
-            </Card.Body>
-            <Card.Footer
-            isBlurred
-            css={{
-            position: "absolute",
-            bgBlur: "#0f111466",
-            borderTop: "$borderWeights$light solid $gray800",
-            bottom: 0,
-            zIndex: 1,
-            }}
-            >
+          <Card css={{ w: "100%", h: "400px" }}>
+          <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
+          <Col>
+          <Text size={12} weight="bold" transform="uppercase" color="#9E9E9E">
+            {/* {movie.release_date} */}
+          </Text>
+          {/* <Text h2 color="white">
+            {movie.original_title}
+          </Text> */}
+          </Col>
+          </Card.Header>
+          <Card.Body css={{ p: 0 }}>
+          <Card.Image
+              src={`http://image.tmdb.org/t/p/w300/${credit.profile_path}`}
+              objectFit="contain"
+              width="100%"
+              height="100%"
+              alt="Relaxing app background"
+          />
+          </Card.Body>
+          <Card.Footer
+          isBlurred
+          css={{
+          position: "absolute",
+          bgBlur: "#0f111466",
+          borderTop: "$borderWeights$light solid $gray800",
+          bottom: 0,
+          zIndex: 1,
+          }}
+          >
+          <Row>
+          <Col>
             <Row>
-            <Col>
-              <Row>
-                <Col>
-                  <Text color="#d1d1d1" size={20} css={{ margin: 'auto',
-                        textGradient: "45deg, $blue600 -20%, $pink600 50%",}} weight="bold">
-                  {credit.character}
-                  </Text>
-                  <Text color="#d1d1d1" size={20}>
-                  {credit.name}
-                  </Text>
-                </Col>
-              </Row>
-            </Col>
-
+              <Col>
+                <Text color="#d1d1d1" size={20} css={{ margin: 'auto',
+                      textGradient: "45deg, $blue600 -20%, $pink600 50%",}} weight="bold">
+                {credit.character}
+                </Text>
+                <Text color="#d1d1d1" size={20}>
+                {credit.name}
+                </Text>
+              </Col>
             </Row>
-            </Card.Footer>
-            </Card>
-            </Grid>
+          </Col>
 
-            ))}
+          </Row>
+          </Card.Footer>
+          </Card>
+          </Grid>
+
+          ))}
         </Grid.Container>
     </Layout>
   )
