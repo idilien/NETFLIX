@@ -17,9 +17,8 @@ const Home: NextPage<Props> =({movies}) => {
   return (
     
     <Layout title='NETFLIX - Populate Movies'>
-        <Container lg>
-
-              <Card css={{ w: "100%", h: "400px" }}>
+        <Container lg css={{marginTop: '50px'}}>
+              <Card css={{ w: "100%", h: "600px" }}>
                       <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
                         <Col css={{paddingTop:30}}>
                           <Text size={12} weight="bold" transform="uppercase" color="#9E9E9E">
@@ -49,7 +48,7 @@ const Home: NextPage<Props> =({movies}) => {
                                   </Row>
                         </Col>
                       </Card.Header>
-                      <Card.Body css={{ p: 0 }}>
+                      <Card.Body >
                         <Card.Image
                             src={` https://image.tmdb.org/t/p/w500/s16H6tpK2utvwDtzZ8Qy4qm5Emw.jpg`}
                           objectFit="cover"

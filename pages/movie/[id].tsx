@@ -8,7 +8,7 @@ import { tmdbApi } from '../../api';
 import { Movie, TmdbListResponse } from '../../interfaces';
 import { localFavorites } from '../../utils';
 import { YoutubeMovie } from '../../utils/youtubeMovie';
-import  axios  from "axios"
+
 
 // interface Props {
 //   movie: Movie
@@ -52,7 +52,7 @@ import  axios  from "axios"
                               src={`http://image.tmdb.org/t/p/w300/${movie.movie.poster_path}`}
                               objectFit='contain'
                               width="100%"
-                              height={600}
+                              height={200}
                               alt="poster movie"
                           />                              
                     </Card>         
@@ -67,13 +67,13 @@ import  axios  from "axios"
                     <Text h5 size={20} css={{marginTop: '30px'}}>
                         Fecha Estreno: {movie.movie.release_date} 
                     </Text >
-                    <Text h5 size={20} css={{marginTop: '30px', marginBottom:'0'}}>
+                    {/* <Text h5 size={20} css={{marginTop: '30px', marginBottom:'0'}}>
                         Productoras: 
                         </Text>
                         <Text>                 
-                        {/* {movie.movie.production_companies[0].name}  */}
+                        {movie.movie.production_companies[0].name} 
                     </Text >
-                          {/* {movie.movie.production_companies[1].name}  */}
+                          {movie.movie.production_companies[1].name}  */}
 
             
                     <Text h5 size={20} css={{marginTop: '30px', marginBottom:'0'}}>

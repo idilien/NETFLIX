@@ -9,7 +9,6 @@ const movies = (): number[] => {
   return JSON.parse(localStorage.getItem('favorites') || '[]')
 }
 
-console.log(movies)
 const FavoritesPage= () => {
   const [favoriteMovies, setFavoriteMovies] = useState<number[]>([])
   

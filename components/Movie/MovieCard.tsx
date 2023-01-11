@@ -21,7 +21,7 @@ export const MovieCard: FC<Props> = ({movie}) => {
                 xs={12}
                 sm={6}
                 md={4}
-                xl={3}
+                // xl={3}
                 key={movie.id}
             >
 
@@ -37,15 +37,15 @@ export const MovieCard: FC<Props> = ({movie}) => {
              </Text> */}
            </Col>
          </Card.Header>
-         <Card.Body css={{ p: 0 }}>
-           <Card.Image
+         {/* <Card.Body > */}
+           <Card.Image css={{h: '300px'}}
             src={`http://image.tmdb.org/t/p/w300/${movie.backdrop_path}`}
-             objectFit="contain"
+             objectFit="cover"
              width="100%"
-             height="100%"
+           
              alt="Relaxing app background"
            />
-         </Card.Body>
+         {/* </Card.Body> */}
          <Card.Footer
            isBlurred
            css={{
@@ -69,7 +69,7 @@ export const MovieCard: FC<Props> = ({movie}) => {
                    /> */}
                  </Col>
                  <Col>
-                   <Text color="#d1d1d1" size={15}>
+                   <Text color="#d1d1d1" size={19} weight='bold'>
                      {movie.original_title}
                    </Text>
                    <Text color="#d1d1d1" size={20}>
