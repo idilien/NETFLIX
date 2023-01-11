@@ -25,12 +25,13 @@ const Home: NextPage<Props> =({movies}) => {
                           <Text size={12} weight="bold" transform="uppercase" color="#9E9E9E">
                             {/* {movie.release_date} */}
                           </Text>
-                          <Text h1 color="black">
+                          <Text h1 css={{
+                               textGradient: "45deg, $blue600 -20%, $pink600 50%",}} weight="bold">
                             Avatar: The Way of Water
                           </Text>
                           <Row justify="flex-start">
                             
-                          <Button
+                          {/* <Button
                                 flat
                                 auto
                                 rounded
@@ -44,7 +45,7 @@ const Home: NextPage<Props> =({movies}) => {
                                   >
                                     Ver Trailer
                                 </Text>
-                              </Button>
+                              </Button> */}
                                   </Row>
                         </Col>
                       </Card.Header>

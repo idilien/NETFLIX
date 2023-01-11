@@ -32,7 +32,7 @@ export const Navbar = () => {
       <NextLink href="/"passHref >
       <Grid css={{display: 'flex', alignItems: 'center'}}>
           {/* <Text color="red" h1>N</Text>  */}
-          <Text color="red" h2>NETFLIX</Text> 
+          <Text color="red" h2 weight="bold">NETFLIX</Text> 
       </Grid>
       <Grid>
       </Grid>
@@ -53,15 +53,18 @@ export const Navbar = () => {
                   Buscar
                 </Button>
               </form> */}
-          {/* <NextLink href="/favorites" passHref>
-          <Button
-                color="gradient"
-                ghost
-                // onPress={}
-                >
-                  Mi Lista      
-          </Button>   
-        </NextLink> */}
+              <Grid>
+                    <NextLink  href="/favorites" passHref>
+                      <Button 
+                           size="sm"
+                            color="gradient"
+                            ghost
+                            // onPress={}
+                            >
+                              Mi Lista      
+                      </Button>   
+                  </NextLink>
+                    </Grid>
     </div>
   )
 }

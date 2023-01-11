@@ -16,7 +16,7 @@ import  axios  from "axios"
 
   const MoviePage: NextPage<any>= (movie) => {
   
-  // console.log(movie);
+  console.log(movie);
 
   const [isInFavorites, setIsInFavorites] = useState(localFavorites.existMovieInFavorites(movie.movie.id))
   const [playYoutube, setPlayYoutube] = useState(false)
@@ -44,7 +44,8 @@ import  axios  from "axios"
 
   return(
     <Layout title={movie.movie.original_title}>
-      <Grid.Container gap={5} css={{marginTop: '5px'}} justify="space-around" >
+      
+              <Grid.Container gap={5} css={{marginTop: '5px'}} justify="space-around" >
               <Grid  sm={12} md={8} >  
                   <Card isHoverable >            
                           <Card.Image 
@@ -54,9 +55,7 @@ import  axios  from "axios"
                               height={600}
                               alt="poster movie"
                           />                              
-                    </Card>  
-
-                
+                    </Card>         
               <Grid  css={{marginTop: '50px'}}>
                     <Text h2   css={{
                         textGradient: "45deg, $blue600 -20%, $pink600 50%",}} weight="bold">
@@ -85,9 +84,7 @@ import  axios  from "axios"
                               {movie.movie.homepage} 
                               </Link>                 
                     </Text>
-              
-  
-              </Grid> 
+                </Grid> 
               </Grid>
               </Grid.Container>
 
@@ -110,7 +107,7 @@ import  axios  from "axios"
                               </Grid>
 
                       </Grid>
-                      {/* <Grid>
+                      <Grid>
                             <Button
                                   color="gradient"         
                                   ghost={!isInFavorites}
@@ -118,77 +115,76 @@ import  axios  from "axios"
                                   >
                                     {isInFavorites  ? 'Incluido en mi lista' : 'Añadir a mi lista'}      
                               </Button>
-                      </Grid>                         */}
-              
+                      </Grid>                              
               </Grid.Container>
 
-      <Grid.Container gap={2} css={{maxWidth:'1220px', margin:'auto', marginTop: '5px'}} justify="space-around" >
-                  {movie.credits.cast.map((credit:any) => (
-                      <Grid
-                      xs={8}
-                      sm={4}
-                      md={3}
-                      xl={2}
-                      key={movie.id}
-                  >
+            
+        <Grid.Container gap={2} css={{maxWidth:'1220px', margin:'auto', marginTop: '5px'}} justify="space-around" >
+            {movie.credits.map((credit:any) => (
+                <Grid
+                xs={8}
+                sm={4}
+                md={3}
+                xl={2}
+                key={credit.id}
+            >
 
             <Card css={{ w: "100%", h: "400px" }}>
-              <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
-                <Col>
-                  <Text size={12} weight="bold" transform="uppercase" color="#9E9E9E">
-                    {/* {movie.release_date} */}
-                  </Text>
-                  {/* <Text h2 color="white">
-                    {movie.original_title}
-                  </Text> */}
-                </Col>
-              </Card.Header>
-              <Card.Body css={{ p: 0 }}>
-                <Card.Image
+            <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
+            <Col>
+            <Text size={12} weight="bold" transform="uppercase" color="#9E9E9E">
+              {/* {movie.release_date} */}
+            </Text>
+            {/* <Text h2 color="white">
+              {movie.original_title}
+            </Text> */}
+            </Col>
+            </Card.Header>
+            <Card.Body css={{ p: 0 }}>
+            <Card.Image
                 src={`http://image.tmdb.org/t/p/w300/${credit.profile_path}`}
-                  objectFit="contain"
-                  width="100%"
-                  height="100%"
-                  alt="Relaxing app background"
-                />
-              </Card.Body>
-              <Card.Footer
-                isBlurred
-                css={{
-                  position: "absolute",
-                  bgBlur: "#0f111466",
-                  borderTop: "$borderWeights$light solid $gray800",
-                  bottom: 0,
-                  zIndex: 1,
-                }}
-              >
-                <Row>
-                  <Col>
-                    <Row>
-                      <Col>
-                        <Text color="#d1d1d1" size={20} css={{ margin: 'auto',
-                              textGradient: "45deg, $blue600 -20%, $pink600 50%",}} weight="bold">
-                        {credit.character}
-                        </Text>
-                        <Text color="#d1d1d1" size={20}>
-                        {credit.name}
-                        </Text>
-                      </Col>
-                    </Row>
-                  </Col>
-            
-                </Row>
-              </Card.Footer>
-            </Card>
-</Grid>
-        
-      ))}
-      </Grid.Container>
- 
+                objectFit="contain"
+                width="100%"
+                height="100%"
+                alt="Relaxing app background"
+            />
+            </Card.Body>
+            <Card.Footer
+            isBlurred
+            css={{
+            position: "absolute",
+            bgBlur: "#0f111466",
+            borderTop: "$borderWeights$light solid $gray800",
+            bottom: 0,
+            zIndex: 1,
+            }}
+            >
+            <Row>
+            <Col>
+              <Row>
+                <Col>
+                  <Text color="#d1d1d1" size={20} css={{ margin: 'auto',
+                        textGradient: "45deg, $blue600 -20%, $pink600 50%",}} weight="bold">
+                  {credit.character}
+                  </Text>
+                  <Text color="#d1d1d1" size={20}>
+                  {credit.name}
+                  </Text>
+                </Col>
+              </Row>
+            </Col>
 
+            </Row>
+            </Card.Footer>
+            </Card>
+            </Grid>
+
+            ))}
+        </Grid.Container>
     </Layout>
   )
 }
+
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
   const API_KEY = process.env.API_KEY
@@ -209,8 +205,9 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
   const {id} = params as {id: string}
   const {data} = await tmdbApi.get<Movie>(`/${id}?api_key=${API_KEY}`)
   const resp = await tmdbApi.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}` )
-  const creditDB = await fetch(`https://api.themoviedb.org/3/movie/76600/credits?api_key=${API_KEY}`)
-  const credits = await creditDB.json() 
+  const creditDB = await tmdbApi.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`)
+  const credits = creditDB.data.cast
+  // console.log(credits);
     const trailer = resp.data.results.filter(
       (video:any) => video.name === "Official Trailer"
       )
